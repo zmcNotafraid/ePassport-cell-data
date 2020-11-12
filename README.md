@@ -10,7 +10,15 @@
 
 ## Data Struct
 
-![certificate data struct](./docs/image/certificate_struct.png)
+- cerfiticate fields
+![certificate data struct](./docs/images/certificate_struct.png)
+
+- issuer fields explain
+  C = country,
+  O = organization,
+  OU = organizational unit,
+  CN = common name
+  SERIALNUMBER = serial number.
 
 ## Dependency
 
