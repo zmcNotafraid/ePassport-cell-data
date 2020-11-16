@@ -96,18 +96,21 @@ public class CSCAMasterList {
 						 String issuer = certificate.getIssuer().toString();
 						 Pattern pattern = Pattern.compile(".*C=([A-Z]*).*");
 						 Matcher matcher = pattern.matcher(issuer);
-						 String issuerId = certificate.getSerialNumber().toString();
+						 String issuerHash = String.valueOf(certificate.getSubject().hashCode());
+						 String serialNumber = certificate.getSerialNumber().toString();
 						 String algorithm = certificate.getSignatureAlgorithm().getAlgorithm().toString();
 						 String publicKey = certificate.getSubjectPublicKeyInfo().getPublicKeyData().toString();
 						 if (matcher.matches()) {
 							 String countryId = matcher.group(1);
-							 String[] result = { issuerId, algorithm, publicKey, countryId };
+							 String[] result = {issuerHash.concat(serialNumber), algorithm, publicKey, countryId };
 							 results.add(String.join(",", result));
 						 }
                      }
                 }
-				FileWriter writer = new FileWriter(writePath + "test" + ".txt");
-				for(String str: results) {
+				ArrayList<String> uniqueResults = new ArrayList<>();
+                results.stream().distinct().forEach(result -> uniqueResults.add(result));
+				FileWriter writer = new FileWriter(writePath + "master-list" + ".txt");
+				for(String str: uniqueResults) {
 					writer.write(str + System.lineSeparator());
 				}
 				writer.close();
