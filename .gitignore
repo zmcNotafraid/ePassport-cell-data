@@ -1,2 +1,9 @@
 bin/*
 
+/*after parser generate file*/
+docs/afterParsing/crl/*
+docs/afterParsing/masterList/*
+!/docs/afterParsing/crl/.keep
+!/docs/afterParsing/masterList/.keep
+
+
